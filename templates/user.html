@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="{{url_for('static',filename='css/chosen.css')}}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style-user.css')}}">
+
+    <title>Multi Select #9</title>
+</head>
+<body>
+
+
+<div class="content">
+    <h2 class="text-center">Multi-Select #9</h2>
+    <div class="container text-left">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+
+                <form action="{{url_for('build')}}" id="myForm" method="post">
+
+
+                    <select id="list" name="list" data-placeholder="Select Categories" multiple class="chosen-select"
+                            tabindex="8">
+                        <option>Design</option>
+                        <option>HTML5</option>
+                        <option>CSS3</option>
+                        <option>jQuery</option>
+                        <option>BS4</option>
+                        <option>Bootstrap</option>
+                        <option>WordPress</option>
+                        <option>FrontEnd</option>
+                    </select>
+                    <input id="submit" type="submit" value="Submit">
+                </form>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="{{url_for('static',filename='js/tools-list-form.js')}}"></script>
+
+
+<script src="{{url_for('static',filename='js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url_for('static',filename='js/popper.min.js')}}"></script>
+<script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static',filename='js/chosen.jquery.min.js')}}"></script>
+
+<script src="{{url_for('static',filename='js/main.js')}}"></script>
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">-->
+<!--    <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>-->
+<!--    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">-->
+<!--    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport"-->
+<!--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+<!--    <title>DockerChef</title>-->
+<!--</head>-->
+<!--<body>-->
+
+
+<!--<div class="row d-flex justify-content-center mt-100">-->
+<!--    <div class="col-md-6"><select id="choices-multiple-remove-button" placeholder="Select upto 5 tags" multiple>-->
+<!--        <option value="HTML">HTML</option>-->
+<!--        <option value="Jquery">Jquery</option>-->
+<!--        <option value="CSS">CSS</option>-->
+<!--        <option value="Bootstrap 3">Bootstrap 3</option>-->
+<!--        <option value="Bootstrap 4">Bootstrap 4</option>-->
+<!--        <option value="Java">Java</option>-->
+<!--        <option value="Javascript">Javascript</option>-->
+<!--        <option value="Angular">Angular</option>-->
+<!--        <option value="Python">Python</option>-->
+<!--        <option value="Hybris">Hybris</option>-->
+<!--        <option value="SQL">SQL</option>-->
+<!--        <option value="NOSQL">NOSQL</option>-->
+<!--        <option value="NodeJS">NodeJS</option>-->
+<!--    </select></div>-->
+<!--</div>-->
+<!--<script>-->
+<!--    $(document).ready(function(){-->
+
+<!--     var multipleCancelButton = new Choices('#choices-multiple-remove-button', {-->
+<!--        removeItemButton: true,-->
+<!--        maxItemCount:5,-->
+<!--        searchResultLimit:5,-->
+<!--        renderChoiceLimit:5-->
+<!--      });-->
+
+
+<!-- });-->
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->
+

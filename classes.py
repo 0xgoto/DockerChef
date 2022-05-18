@@ -17,7 +17,7 @@ users = db["Users"]
 
 
 def UserExist(username):
-    if users.count_documents({"username":username}) == 0:
+    if users.count_documents({"Username": username}) == 0:
         return False
     else:
         return True
@@ -35,3 +35,12 @@ def verifyPw(username, password):
         return True
     else:
         return False
+
+
+def retJson(status, msg):
+    ret = {
+        "status": status,
+        "msg": msg
+    }
+
+    return jsonify(ret)

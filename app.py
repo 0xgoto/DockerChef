@@ -27,9 +27,29 @@ def index():
 
 @app.route('/login', methods=['POST'])
 def login():
-    username = request.form.get('email')
+    username = request.form.get('uname')
     password = request.form.get('pswd')
-    return "password " + password
+    if classes.verifyPw(username, password):
+        session.permanent = True
+        session["user"] = username
+        # return classes.retJson(200, "Logged in successfully")
+        return redirect(url_for("user"), code=307)
+    else:
+        # return classes.retJson(302, "Invalid Username/Password")
+        return render_template("index.html")
+
+
+@app.route('/user', methods=['POST'])
+def user():
+    return render_template('user.html')
+    # return "<h1> Welcome {}! </h1>".format(session["user"])
+
+
+@app.route('/build', methods=['POST'])
+def build():
+    lst = request.form.getlist('list')
+    print(lst)
+    return "tuple(lst)"
 
 
 @app.route('/signup', methods=['POST'])
@@ -39,7 +59,7 @@ def signup():
     password = request.form.get('pswd')
 
     if classes.UserExist(username):
-        return render_template(url_for('index'), message="User already exist!")
+        return render_template('index.html', data="User already exist!")
 
     hashed_pw = bcrypt.hashpw(password.encode('utf8'), bcrypt.gensalt())
     users.insert_one({
