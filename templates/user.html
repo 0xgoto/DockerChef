@@ -10,7 +10,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <!--    <link rel="stylesheet" href="fonts/icomoon/style.css">-->
 
     <link rel="stylesheet" href="{{url_for('static',filename='css/chosen.css')}}">
 
@@ -20,13 +20,13 @@
     <!-- Style -->
     <link rel="stylesheet" href="{{url_for('static',filename='css/style-user.css')}}">
 
-    <title>Multi Select #9</title>
+    <title>DockerChef</title>
 </head>
 <body>
 
 
 <div class="content">
-    <h2 class="text-center">Multi-Select #9</h2>
+    <h2 class="text-center">Select the Tools</h2>
     <div class="container text-left">
         <div class="row justify-content-center">
             <div class="col-md-5">
@@ -34,18 +34,16 @@
                 <form action="{{url_for('build')}}" id="myForm" method="post">
 
 
-                    <select id="list" name="list" data-placeholder="Select Categories" multiple class="chosen-select"
+                    <select id="list" name="list" data-placeholder="Tools" multiple required class="chosen-select"
                             tabindex="8">
-                        <option>Design</option>
-                        <option>HTML5</option>
-                        <option>CSS3</option>
-                        <option>jQuery</option>
-                        <option>BS4</option>
-                        <option>Bootstrap</option>
-                        <option>WordPress</option>
-                        <option>FrontEnd</option>
+                        <option>wget</option>
+                        <option>vim</option>
+                        <option>python3</option>
+                        <option>dnsutil</option>
+                        <option>tmux</option>
                     </select>
-                    <input id="submit" type="submit" value="Submit">
+                    <input type="hidden" name="dockerfile" value="summa"/>
+                    <input id="submit" onclick="myFunction()" type="submit" value="Submit">
                 </form>
 
 
@@ -55,7 +53,7 @@
         </div>
     </div>
 </div>
-</div>
+
 
 <script src="{{url_for('static',filename='js/tools-list-form.js')}}"></script>
 

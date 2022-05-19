@@ -1,11 +1,12 @@
 #! /usr/bin/python3
 
-from flask import Flask, jsonify, request, session, render_template, redirect, g, url_for
-from pymongo import MongoClient
-import bcrypt
 import os
-import docker
 from datetime import timedelta
+
+import bcrypt
+from flask import Flask, request, session, render_template, redirect, url_for
+from pymongo import MongoClient
+
 import classes
 
 app = Flask(__name__)
@@ -41,15 +42,26 @@ def login():
 
 @app.route('/user', methods=['POST'])
 def user():
-    return render_template('user.html')
+    return render_template('user.html', user=session["user"])
     # return "<h1> Welcome {}! </h1>".format(session["user"])
 
 
 @app.route('/build', methods=['POST'])
 def build():
     lst = request.form.getlist('list')
-    print(lst)
-    return "tuple(lst)"
+    username = session["user"]
+    apt_cmd = ""
+    if lst != "":
+        apt_cmd = "FROM ubuntu:18.04\nRUN apt-get update && apt-get install -y \\\n\t"
+        for tool in lst:
+            apt_cmd += tool + " \\ \n\t"
+        apt_cmd += "&& rm -rf /var/lib/apt/lists/*"
+    dest_file = "results/" + username + "/Dockerfile"
+    dest_path = "results/" + username + "/"
+    dockerfile = open(dest_file, "w")
+    dockerfile.write(apt_cmd)
+    dockerfile.close()
+    return apt_cmd
 
 
 @app.route('/signup', methods=['POST'])
@@ -67,7 +79,7 @@ def signup():
         "Email": email,
         "Password": hashed_pw,
         "tools_used": [],
-        "Docker_history": {}
+        "Docker_history": []
     })
     os.system("mkdir results/" + username)
 
