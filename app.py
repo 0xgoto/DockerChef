@@ -62,7 +62,7 @@ def build():
         apt_cmd += "&& rm -rf /var/lib/apt/lists/*\n"
 
     apt_cmd += "RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 " + username+"\n"
-    apt_cmd += "echo '" + username + ":" + username + "' | chpasswd\n"
+    apt_cmd += "RUN echo '" + username + ":" + username + "' | chpasswd\n"
     apt_cmd += "RUN service ssh start"
     apt_cmd += "EXPOSE 22"
     apt_cmd += "CMD [\"/usr/sbin/sshd\",\"-D\"]"
