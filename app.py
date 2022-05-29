@@ -63,8 +63,8 @@ def build():
 
     apt_cmd += "RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 " + username+"\n"
     apt_cmd += "RUN echo '" + username + ":" + username + "' | chpasswd\n"
-    apt_cmd += "RUN service ssh start"
-    apt_cmd += "EXPOSE 22"
+    apt_cmd += "RUN service ssh start\n"
+    apt_cmd += "EXPOSE 22\n"
     apt_cmd += "CMD [\"/usr/sbin/sshd\",\"-D\"]"
     dest_file = "results/" + username + "/Dockerfile"
     dest_path = "results/" + username + "/"
