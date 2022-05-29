@@ -14,14 +14,6 @@
     <meta name="theme-color" content="#0ed3cf">
 
 
-
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@TwComponents" />
-    <meta name="twitter:title" content="404 Page Not Found by atif0075" />
-    <meta name="twitter:description" content="This is simple and minmal 404 Error Page Design with Tailwindcss jit mode" />
-    <meta name="twitter:image" content="https://tailwindcomponents.com/storage/6425/conversions/temp12652-ogimage.jpg?v=2022-05-29 06:14:29" />
-
     <title>DockerChef</title>
 
             <script src="https://cdn.tailwindcss.com"></script>
@@ -42,6 +34,10 @@
         ></span>
 
         <span class="relative block px-8 py-3 bg-[#1A2238] border border-current">
+            <form action="{{url_for('deploy')}}" method="post">
+                <input type="hidden" name="image" value="{{image}}">
+                <input id="submit" type="submit" value="Deploy">
+            </form>
           <router-link to="{{url_for('deploy')}}">Deploy</router-link>
         </span>
       </a>
