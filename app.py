@@ -56,7 +56,7 @@ def build():
     username = session["user"]
     apt_cmd = ""
     if lst != "":
-        apt_cmd = "FROM ubuntu:18.04\nRUN apt-get update && apt-get openssh-server install -y \\\n\t"
+        apt_cmd = "FROM ubuntu:18.04\nRUN apt-get update && apt-get install -y openssh-server \\\n\t"
         for tool in lst:
             apt_cmd += tool + " \\ \n\t"
         apt_cmd += "&& rm -rf /var/lib/apt/lists/*\n"
