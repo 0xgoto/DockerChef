@@ -70,7 +70,7 @@ def build():
     print(docker_client.login("nukkunda", "whatiswr0ng", "lefef79626@ztymm.com"))
     print(docker_client.images.build(path="results/" + username, dockerfile="Dockerfile",
                                      tag="nukkunda/" + username + ":" + image_name, rm=True))
-    print(docker_client.images.push(repository="nukkunda/testing"))
+    print(docker_client.images.push(repository="nukkunda/"+username))
     return apt_cmd
 
 
