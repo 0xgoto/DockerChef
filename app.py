@@ -106,7 +106,7 @@ def build():
     return render_template('build.html', image="nukkunda/" + username + ":" + image_name)
 
 
-@app.route('/deploy', methods=['POST'])
+@app.route('/deploy', methods=['POST','GET'])
 def deploy():
     return "hihi"
 
