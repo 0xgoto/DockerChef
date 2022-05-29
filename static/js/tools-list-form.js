@@ -13,6 +13,7 @@ function myFunction()
 
     document.getElementById('dockerfile').value = dockerfile
     alert(document.getElementById('dockerfile').value)
+    return dockerfile
 }
 
 
@@ -24,26 +25,26 @@ function myFunction()
 
 
 
-// var form = document.getElementById('myForm')
+ var form = document.getElementById('myForm')
 
-// form.addEventListener('submit',function(event){
-//     event.preventDefault()
+ form.addEventListener('submit',function(event){
+     event.preventDefault()
 
-//     var lst = document.querySelector('#list')
-//     var selectedtools = [].filter.call(lst.options, option => option.selected).map(option => option.text);
+     var lst = document.querySelector('#list')
+     var selectedtools = [].filter.call(lst.options, option => option.selected).map(option => option.text);
 
-//     var dockerfile = "FROM ubuntu:18.04\nRUN apt-get update && apt-get install -y \\\n\t"
+     var dockerfile = "FROM ubuntu:18.04\nRUN apt-get update && apt-get install -y \\\n\t"
 
-//     for(var tool in selectedtools){
-//         dockerfile += selectedtools[tool] + " \\ \n\t"
-//     }
+     for(var tool in selectedtools){
+         dockerfile += selectedtools[tool] + " \\ \n\t"
+     }
 
-//     dockerfile += "&& rm -rf /var/lib/apt/lists/*"
+     dockerfile += "&& rm -rf /var/lib/apt/lists/*"
 
-//     console.log(dockerfile)
+     console.log(dockerfile)
 
-//     this.submit();
+     this.submit();
 
 
 
-// })
+ })

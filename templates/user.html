@@ -31,19 +31,24 @@
         <div class="row justify-content-center">
             <div class="col-md-5">
 
-                <form action="{{url_for('build')}}" id="myForm" method="post">
+                <form action="{{url_for('build')}}" method="post">
+
+                    <input type="text" name="name" placeholder="Image Name" required="">
 
 
-                    <select id="list" name="list" data-placeholder="Tools" multiple required class="chosen-select"
-                            tabindex="8">
-                        <option>wget</option>
-                        <option>vim</option>
-                        <option>python3</option>
-                        <option>dnsutil</option>
-                        <option>tmux</option>
+                    <select id="choices-multiple-remove-button" data-placeholder="Tools" multiple required
+                            class="chosen-select">
+                        {% for tool in tools %}
+                        <option>{{tool}}</option>
+                        {% endfor %}
                     </select>
-                    <input type="hidden" name="dockerfile" value="summa"/>
-                    <input id="submit" onclick="myFunction()" type="submit" value="Submit">
+                    <input id="submit" type="submit" value="Submit">
+                </form>
+
+                <form action="/action_page.php" target="_blank">
+                    <input type="file" id="myFile" name="filename">
+                    <input type="submit">
+
                 </form>
 
 
@@ -54,6 +59,23 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+
+     var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+        removeItemButton: true,
+        maxItemCount:5,
+        searchResultLimit:5,
+        renderChoiceLimit:5
+      });
+
+
+    });
+
+
+
+
+</script>
 
 <script src="{{url_for('static',filename='js/tools-list-form.js')}}"></script>
 

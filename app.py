@@ -4,6 +4,7 @@ import os
 from datetime import timedelta
 
 import bcrypt
+import docker
 from flask import Flask, request, session, render_template, redirect, url_for
 from pymongo import MongoClient
 
@@ -19,6 +20,8 @@ client = MongoClient("mongodb://user_g0at:bs0dislit@cluster0-shard-00-00.xwp04.m
                      "-1009yy-shard-0&authSource=admin&retryWrites=true&w=majority")
 db = client.dockerchef
 users = db["Users"]
+tools = db["tools"]
+tools_list = tools.find()[0]["tools"]
 
 
 @app.route('/')
@@ -40,15 +43,16 @@ def login():
         return render_template("index.html")
 
 
-@app.route('/user', methods=['POST'])
+@app.route('/user', methods=['POST', 'GET'])
 def user():
-    return render_template('user.html', user=session["user"])
+    return render_template('user.html', user=session["user"], tools=tools_list)
     # return "<h1> Welcome {}! </h1>".format(session["user"])
 
 
 @app.route('/build', methods=['POST'])
 def build():
     lst = request.form.getlist('list')
+    image_name = request.form.get('name')
     username = session["user"]
     apt_cmd = ""
     if lst != "":
@@ -61,7 +65,18 @@ def build():
     dockerfile = open(dest_file, "w")
     dockerfile.write(apt_cmd)
     dockerfile.close()
+
+    docker_client = docker.from_env()
+    print(docker_client.login("nukkunda", "whatiswr0ng", "lefef79626@ztymm.com"))
+    print(docker_client.images.build(path="results/" + username, dockerfile="Dockerfile",
+                                     tag="nukkunda/" + username + ":" + image_name, rm=True))
+    print(docker_client.images.push(repository="nukkunda/testing"))
     return apt_cmd
+
+
+# @app.route('/deploy', methods=['POST'])
+# def deploy():
+#     image
 
 
 @app.route('/signup', methods=['POST'])
