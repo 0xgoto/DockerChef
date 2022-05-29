@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0ed3cf">
+    <meta name="msapplication-TileColor" content="#0ed3cf">
+    <meta name="theme-color" content="#0ed3cf">
+
+
+
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@TwComponents" />
+    <meta name="twitter:title" content="404 Page Not Found by atif0075" />
+    <meta name="twitter:description" content="This is simple and minmal 404 Error Page Design with Tailwindcss jit mode" />
+    <meta name="twitter:image" content="https://tailwindcomponents.com/storage/6425/conversions/temp12652-ogimage.jpg?v=2022-05-29 06:14:29" />
+
+    <title>DockerChef</title>
+
+            <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+<body class="bg-gray-200">
+    <main class="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]">
+	<h1 class="text-9xl font-extrabold text-white tracking-widest">{{image}}</h1>
+	<div class="bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute">
+		successfully created
+	</div>
+</br>
+	<button class="mt-5">
+      <a
+        class="relative inline-block text-sm font-medium text-[#FF6A3D] group active:text-orange-500 focus:outline-none focus:ring"
+      >
+        <span
+          class="absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] group-hover:translate-y-0 group-hover:translate-x-0"
+        ></span>
+
+        <span class="relative block px-8 py-3 bg-[#1A2238] border border-current">
+          <router-link to="{{url_for('deploy')}}">Deploy</router-link>
+        </span>
+      </a>
+    </button>
+</main>
+</body>
+</html>

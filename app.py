@@ -43,48 +43,6 @@ def login():
         return render_template("index.html")
 
 
-@app.route('/user', methods=['POST', 'GET'])
-def user():
-    return render_template('user.html', user=session["user"], tools=tools_list)
-    # return "<h1> Welcome {}! </h1>".format(session["user"])
-
-
-@app.route('/build', methods=['POST'])
-def build():
-    lst = request.form.getlist('list')
-    image_name = request.form.get('name')
-    username = session["user"]
-    apt_cmd = ""
-    if lst != "":
-        apt_cmd = "FROM ubuntu:18.04\nRUN apt-get update && apt-get install -y openssh-server \\\n\t"
-        for tool in lst:
-            apt_cmd += tool + " \\ \n\t"
-        apt_cmd += "&& rm -rf /var/lib/apt/lists/*\n"
-
-    apt_cmd += "RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 " + username+"\n"
-    apt_cmd += "RUN echo '" + username + ":" + username + "' | chpasswd\n"
-    apt_cmd += "RUN service ssh start\n"
-    apt_cmd += "EXPOSE 22\n"
-    apt_cmd += "CMD [\"/usr/sbin/sshd\",\"-D\"]"
-    dest_file = "results/" + username + "/Dockerfile"
-    dest_path = "results/" + username + "/"
-    dockerfile = open(dest_file, "w")
-    dockerfile.write(apt_cmd)
-    dockerfile.close()
-
-    docker_client = docker.from_env()
-    print(docker_client.login("nukkunda", "whatiswr0ng", "lefef79626@ztymm.com"))
-    print(docker_client.images.build(path="results/" + username, dockerfile="Dockerfile",
-                                     tag="nukkunda/" + username + ":" + image_name, rm=True))
-    print(docker_client.images.push(repository="nukkunda/" + username))
-    return apt_cmd
-
-
-# @app.route('/deploy', methods=['POST'])
-# def deploy():
-#     image
-
-
 @app.route('/signup', methods=['POST'])
 def signup():
     username = request.form.get('uname')
@@ -103,13 +61,54 @@ def signup():
         "Docker_history": []
     })
     os.system("mkdir results/" + username)
+    session.permanent = True
+    session["user"] = username
 
-    ret = {
-        "status": 200,
-        "msg": "Account created"
-    }
+    return redirect(url_for("user"), code=307)
 
-    return ret
+
+@app.route('/user', methods=['POST', 'GET'])
+def user():
+    return render_template('user.html', user=session["user"], tools=tools_list)
+    # return "<h1> Welcome {}! </h1>".format(session["user"])
+
+
+@app.route('/build', methods=['POST'])
+def build():
+    if not session["user"]:
+        return render_template('index.html')
+    lst = request.form.getlist('list')
+    image_name = request.form.get('name')
+    username = session["user"]
+    apt_cmd = ""
+    if lst != "":
+        apt_cmd = "FROM ubuntu:18.04\nRUN apt-get update && apt-get install -y openssh-server \\\n\t"
+        for tool in lst:
+            apt_cmd += tool + " \\ \n\t"
+        apt_cmd += "&& rm -rf /var/lib/apt/lists/*\n"
+
+    apt_cmd += "RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 " + username + "\n"
+    apt_cmd += "RUN echo '" + username + ":" + username + "' | chpasswd\n"
+    apt_cmd += "RUN service ssh start\n"
+    apt_cmd += "EXPOSE 22\n"
+    apt_cmd += "CMD [\"/usr/sbin/sshd\",\"-D\"]"
+    dest_file = "results/" + username + "/Dockerfile"
+    dest_path = "results/" + username + "/"
+    dockerfile = open(dest_file, "w")
+    dockerfile.write(apt_cmd)
+    dockerfile.close()
+
+    docker_client = docker.from_env()
+    print(docker_client.login("nukkunda", "whatiswr0ng", "lefef79626@ztymm.com"))
+    print(docker_client.images.build(path="results/" + username, dockerfile="Dockerfile",
+                                     tag="nukkunda/" + username + ":" + image_name, rm=True))
+    print(docker_client.images.push(repository="nukkunda/" + username))
+    return render_template('build.html', image="nukkunda/" + username + ":" + image_name)
+
+
+# @app.route('/deploy', methods=['POST'])
+# def deploy():
+#     image
 
 
 if __name__ == "__main__":
