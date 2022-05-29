@@ -56,10 +56,16 @@ def build():
     username = session["user"]
     apt_cmd = ""
     if lst != "":
-        apt_cmd = "FROM ubuntu:18.04\nRUN apt-get update && apt-get install -y \\\n\t"
+        apt_cmd = "FROM ubuntu:18.04\nRUN apt-get update && apt-get openssh-server install -y \\\n\t"
         for tool in lst:
             apt_cmd += tool + " \\ \n\t"
-        apt_cmd += "&& rm -rf /var/lib/apt/lists/*"
+        apt_cmd += "&& rm -rf /var/lib/apt/lists/*\n"
+
+    apt_cmd += "RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 " + username+"\n"
+    apt_cmd += "echo '" + username + ":" + username + "' | chpasswd\n"
+    apt_cmd += "RUN service ssh start"
+    apt_cmd += "EXPOSE 22"
+    apt_cmd += "CMD [\"/usr/sbin/sshd\",\"-D\"]"
     dest_file = "results/" + username + "/Dockerfile"
     dest_path = "results/" + username + "/"
     dockerfile = open(dest_file, "w")
@@ -70,7 +76,7 @@ def build():
     print(docker_client.login("nukkunda", "whatiswr0ng", "lefef79626@ztymm.com"))
     print(docker_client.images.build(path="results/" + username, dockerfile="Dockerfile",
                                      tag="nukkunda/" + username + ":" + image_name, rm=True))
-    print(docker_client.images.push(repository="nukkunda/"+username))
+    print(docker_client.images.push(repository="nukkunda/" + username))
     return apt_cmd
 
 
