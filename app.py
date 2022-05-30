@@ -108,7 +108,7 @@ def build():
 
 @app.route('/deploy', methods=['POST','GET'])
 def deploy():
-    return redirect("https://13.127.197.122:4222")
+    return redirect("http://13.127.197.122:4222")
 
 
 if __name__ == "__main__":
