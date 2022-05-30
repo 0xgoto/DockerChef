@@ -25,67 +25,58 @@
 <body>
 
 
-<div class="content">
-    <h2 class="text-center">Select the Tools</h2>
-    <div class="container text-left">
-        <div class="row justify-content-center">
-            <div class="col-md-5">
+<h2>Builder</h2>
+</br>
+</br>
+<div class="warpper">
+    <input class="radio" id="one" name="group" type="radio" checked>
+    <input class="radio" id="two" name="group" type="radio">
 
-                <form action="{{url_for('build')}}" method="post">
+    <div class="tabs">
+        <label class="tab" id="one-tab" for="one">Select Tools</label>
+        <label class="tab" id="two-tab" for="two">Upload Dockerfile</label>
 
-                    <input type="text" name="name" placeholder="Image Name" required="">
+    </div>
+    <div class="panels">
+        <div class="panel" id="one-panel">
+            <div class="panel-title">Select the tools from the list</div>
+            </br>
+            <form action="{{url_for('build')}}" method="post">
 
+                <input type="text" name="name" placeholder="Image Name" required="">
 
-                    <select id="choices-multiple-remove-button" data-placeholder="Tools" multiple required
-                            class="chosen-select">
-                        {% for tool in tools %}
-                        <option>{{tool}}</option>
-                        {% endfor %}
-                    </select>
-                    <input id="submit" type="submit" value="Submit">
-                </form>
-
-                <form action="/action_page.php" target="_blank">
-                    <input type="file" id="myFile" name="filename">
-                    <input type="submit">
-
-                </form>
-
-
-            </div>
-
-
+                <select id="choices-multiple-remove-button" data-placeholder="Tools" multiple required
+                        class="chosen-select">
+                    {% for tool in tools %}
+                    <option>{{tool}}</option>
+                    {% endfor %}
+                </select>
+                <input id="submit" type="submit" value="Submit">
+            </form>
         </div>
+        <div class="panel" id="two-panel">
+            <div class="panel-title">Already have your dockerfile ready?</div>
+            </br>
+            <form action="/action_page.php" target="_blank">
+                <input type="file" id="myFile" name="filename">
+                </br>
+                </br>
+                <input type="submit">
+
+            </form>
+        </div>
+
     </div>
 </div>
 
-<script type="text/javascript">
-    $(document).ready(function(){
 
-     var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
-        removeItemButton: true,
-        maxItemCount:5,
-        searchResultLimit:5,
-        renderChoiceLimit:5
-      });
+    <script src="{{url_for('static',filename='js/tools-list-form.js')}}"></script>
+    <script src="{{url_for('static',filename='js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/popper.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/chosen.jquery.min.js')}}"></script>
 
-
-    });
-
-
-
-
-</script>
-
-<script src="{{url_for('static',filename='js/tools-list-form.js')}}"></script>
-
-
-<script src="{{url_for('static',filename='js/jquery-3.3.1.min.js')}}"></script>
-<script src="{{url_for('static',filename='js/popper.min.js')}}"></script>
-<script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
-<script src="{{url_for('static',filename='js/chosen.jquery.min.js')}}"></script>
-
-<script src="{{url_for('static',filename='js/main.js')}}"></script>
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
 </body>
 </html>
 

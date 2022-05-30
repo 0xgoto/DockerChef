@@ -75,8 +75,6 @@ def user():
 
 @app.route('/build', methods=['POST'])
 def build():
-    if not session["user"]:
-        return render_template('index.html')
     lst = request.form.getlist('list')
     image_name = request.form.get('name')
     username = session["user"]
