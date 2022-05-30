@@ -110,10 +110,10 @@ def deploy():
 
     ssh_port = random.randint(2002, 2062)
     os.system("sudo docker run -d -p 22:"+str(ssh_port)+" "+image)
-    os.system("sudo fuser -k 4222/tcp")
     os.system("shellinaboxd --disable-ssl --port 4222 -s /:SSH:172.31.13.227:"+str(ssh_port)+"&")
     return redirect("http://13.127.197.122:4222")
 
 
 if __name__ == "__main__":
+    os.system("sudo fuser -k 4222/tcp")
     app.run(debug=True, host="0.0.0.0", port=8001)
