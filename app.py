@@ -2,7 +2,7 @@
 
 import os
 from datetime import timedelta
-
+import random
 import bcrypt
 import docker
 from flask import Flask, request, session, render_template, redirect, url_for
@@ -106,8 +106,12 @@ def build():
     return render_template('build.html', image="nukkunda/" + username + ":" + image_name)
 
 
-@app.route('/deploy', methods=['POST','GET'])
+@app.route('/deploy', methods=['POST', 'GET'])
 def deploy():
+    image = request.form.get('image')
+
+    ssh_port = random.randint(2002, 2062)
+    os.system("ls")
     return redirect("http://13.127.197.122:4222")
 
 
