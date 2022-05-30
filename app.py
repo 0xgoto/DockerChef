@@ -75,8 +75,8 @@ def user():
 
 @app.route('/build', methods=['POST'])
 def build():
-    # if not session["user"]:
-    #     return render_template('index.html')
+    if not session["user"]:
+        return render_template('index.html')
     lst = request.form.getlist('list')
     image_name = request.form.get('name')
     username = session["user"]
@@ -108,7 +108,7 @@ def build():
 
 @app.route('/deploy', methods=['POST','GET'])
 def deploy():
-    return redirect("https://localhost:4222")
+    return redirect("https://13.127.197.122:4222")
 
 
 if __name__ == "__main__":
