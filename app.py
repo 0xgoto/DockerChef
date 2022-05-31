@@ -111,8 +111,8 @@ def deploy():
     ssh_port = random.randint(2002, 2062)
     shell_port = random.randint(4002, 4062)
     os.system("sudo docker run -d -p 22:"+str(ssh_port)+" "+image)
-    os.system("shellinaboxd --disable-ssl --port "+shell_port+" -s /:SSH:172.31.13.227:"+str(ssh_port)+"&")
-    return redirect("http://13.127.197.122:"+shell_port)
+    os.system("shellinaboxd --disable-ssl --port "+str(shell_port)+" -s /:SSH:172.31.13.227:"+str(ssh_port)+"&")
+    return redirect("http://13.127.197.122:"+str(shell_port))
 
 
 if __name__ == "__main__":
